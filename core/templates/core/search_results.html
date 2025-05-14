@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados – Glossário de IHC</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            padding: 3rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #2c2c2c;
+        }
+
+        .term {
+            margin-bottom: 1.5rem;
+        }
+
+        .term h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #4f4f4f;
+        }
+
+        .term p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+
+        .term a {
+            color: #4f4f4f;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid #ddd;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            display: inline-block;
+            transition: background-color 0.2s;
+        }
+
+        .term a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #777;
+            font-size: 1rem;
+            margin-top: 2rem;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            text-decoration: none;
+            color: #4f4f4f;
+            font-size: 0.95rem;
+            border: 1px solid #ccc;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            transition: background-color 0.2s;
+        }
+
+        .back:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Resultados para "{{ query }}"</h1>
+
+        {% if results %}
+        {% for term in results %}
+        <div class="term">
+            <h3><a href="{% url 'detail' term.id %}">{{ term.name }}</a></h3>
+            <p>{{ term.definition|truncatewords:20 }}</p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="no-results">Nenhum termo encontrado com "{{ query }}".</p>
+        {% endif %}
+
+        <a class="back" href="{% url 'home' %}">← Voltar à página inicial</a>
+    </div>
+</body>
+
+</html>

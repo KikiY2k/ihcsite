@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ term.name }} – Glossário de IHC</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            padding: 3rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #2c2c2c;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #4f4f4f;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 400px;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
+        .related-terms {
+            font-size: 1rem;
+            color: #777;
+            margin-top: 2rem;
+        }
+
+        .related-terms h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #4f4f4f;
+        }
+
+        .related-terms ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .related-terms li {
+            display: inline-block;
+            margin-right: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .related-terms a {
+            text-decoration: none;
+            color: #4f4f4f;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .related-terms a:hover {
+            background-color: #eaeaea;
+            transform: translateY(-2px);
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            text-decoration: none;
+            color: #4f4f4f;
+            font-size: 0.95rem;
+            border: 1px solid #ccc;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            transition: background-color 0.2s;
+        }
+
+        .back:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>{{ term.name }}</h1>
+
+        <h3>{{ term.name }}</h3>
+
+        {% if term.image_url %}
+        <img src="{{ term.image_url }}" alt="Imagem relacionada ao termo {{ term.name }}">
+        {% endif %}
+
+        <p>{{ term.definition }}</p>
+
+        {% if term.related_terms.all %}
+        <div class="related-terms">
+            <h4>Termos relacionados:</h4>
+            <ul>
+                {% for related_term in term.related_terms.all %}
+                <li>
+                    <a href="{% url 'detail' related_term.id %}">{{ related_term.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <a class="back" href="{% url 'home' %}">← Voltar à página inicial</a>
+    </div>
+</body>
+
+</html>
