@@ -1,0 +1,31 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Definições - IHCionário{% endblock %}
+
+{% block pageTitle %}Lista de Definições{% endblock %}
+
+{% block pageTitleMobile %}Lista de Definições{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    {% for capitulo in capitulos %}
+    <h2 class="definitions-category">{{ capitulo.titulo }}</h2>
+    <div class="definition-category-list">
+        {% for termo in capitulo.termos.all %}
+            <div class="definition-item  {% if forloop.last %}no-border{% endif %}">
+                <span class="material-icons">menu_book</span>
+                <div class="definition-text">
+                    <a href="{% url 'detail' id=termo.id %}" style="text-decoration: none;">
+                       <h3 class="definition-term">{{ termo.titulo }}</h3>
+                    </a>
+                    {% with definicao=termo.definicoes.first %}
+                    <p class="definition-text">{{ definicao.texto|truncatechars:200 }}</p>
+                    {% endwith %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

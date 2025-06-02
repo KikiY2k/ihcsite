@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Referências - IHCionário{% endblock %}
+
+{% block pageTitle %}Lista de Referências{% endblock %}
+
+{% block pageTitleMobile %}Lista de Referências{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    {% for termo in termos %}
+    <div class="reference-item">
+        <a href="{% url 'detail' id=termo.id %}" style="text-decoration: none;">
+            <h3 class="reference-term">{{ termo.titulo }}</h3>
+        </a>
+        {% with refs=termo.definicoes.all %}
+        {% if refs %}
+            {% for definicao in termo.definicoes.all %}
+                {% for ref in definicao.referencias.all %}
+                <p>{{ref.titulo}}</p>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

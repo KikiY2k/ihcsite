@@ -1,100 +1,17 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "core/base.html" %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Glossário de IHC" />
-    <meta property="og:description"
-        content="Busque termos e definições sobre Interação Humano-Computador de forma simples e rápida." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
-    <title>Glossário de IHC</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+{% block title %}Home - IHCionário{% endblock %}
 
-        body {
-            margin: 0;
-            padding: 1rem; /* adiciona respiro lateral */
-            font-family: 'Inter', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            box-sizing: border-box;
-        }
-
-        .container {
-            text-align: center;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 2rem;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-        }
-
-        h1 {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #2c2c2c;
-        }
-
-        p {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 2rem;
-        }
-
-        form {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-        }
-
-        input[type="text"] {
-            padding: 0.6rem 1rem;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            width: 60%;
-            background-color: #fafafa;
-        }
-
-        input[type="text"]:focus {
-            outline: none;
-            border-color: #999;
-        }
-
-        button {
-            padding: 0.6rem 1.1rem;
-            font-size: 1rem;
-            background-color: #4f4f4f;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        button:hover {
-            background-color: #3a3a3a;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <h1>Glossário de IHC</h1>
-        <p>Encontre definições para termos usados em Interação Humano-Computador.</p>
-        <form method="get" action="{% url 'search' %}">
-            <input type="text" name="q" placeholder="Buscar termo..." required>
-            <button type="submit">Buscar</button>
+{% block content %}
+<div class="page-content-home">
+    <div class="home">
+        <form action="{% url 'search' %}" method="get">
+        <h1>IHCionário</h1>
+        <p class="subtitle">Encontre definições para termos usados em Interação Humano-Computador.</p>
+        <input class="search-input" type="text" placeholder="Ex: Usabilidade" name="q" value="{{ query }}"  />
+        <button class="search-button" type="submit">Buscar</button>
         </form>
     </div>
-</body>
-
-</html>
+</div>
+{% endblock %}

@@ -1,0 +1,103 @@
+<!-- templates/base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}IHCionário{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header para telas pequenas -->
+    {% if request.path != '/' %}
+    <header class="mobile-header">
+        <a href="{% url 'home' %}" style="text-decoration: none;">
+            <div class="mobile-header-title {% if request.path == '/' %}no-search{% endif %}">IHCionário</div>
+        </a>
+        <form action="{% url 'search' %}" method="get">
+            <div class="mobile-search-box">
+                <span class="material-icons">search</span>
+                <input type="text" placeholder="Pesquisar" name="q" value="{{ query }}" />
+            </div>
+        </form>
+    </header>
+    <div class="page-header-mobile">
+        <a href="javascript:history.back()" class="back-button">
+            <span class="material-icons">arrow_back</span>
+        </a>
+        <h1 class="page-title">{% block pageTitleMobile %}Título da Página{% endblock %}</h1>
+    </div>
+    {% endif %}
+    {% if request.path == '/' %}
+    <header class="mobile-header-no-search">
+        <a href="{% url 'home' %}" style="text-decoration: none;">
+            <div class="mobile-header-title no-search">IHCionário</div>
+        </a>
+    </header>
+    {% endif %}
+    <div class="container">
+        <aside class="sidebar">
+            <a href="{% url 'home' %}" style="text-decoration: none;">
+                <div class="logo">IHCionário</div>
+            </a>
+            <form action="{% url 'search' %}" method="get">
+                <div class="search-box">
+                    <span class="material-icons">search</span>
+                    <input type="text" placeholder="Pesquisar" name="q" value="{{ query }}" />
+                </div>
+            </form>
+            <nav>
+                <a class="menu-item {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">
+                    <span class="material-icons">home</span> Home
+                </a>
+                <a class="menu-item {% if request.path == '/sobre/' %}active{% endif %}" href="{% url 'about' %}">
+                    <span class="material-icons">info</span> Sobre
+                </a>
+                <a class="menu-item {% if request.path == '/definicoes/' %}active{% endif %}" href="{% url 'terms' %}">
+                    <span class="material-icons">menu_book</span> Definições
+                </a>
+                <a class="menu-item {% if request.path == '/referencias/' %}active{% endif %}"
+                    href="{% url 'references' %}">
+                    <span class="material-icons">bookmark</span> Referências
+                </a>
+            </nav>
+        </aside>
+        {% if request.path != '/' %}
+        <div class="page-header">
+            <a href="javascript:history.back()" class="back-button">
+                <span class="material-icons">arrow_back</span>
+            </a>
+            <h1 class="page-title">{% block pageTitle %}Título da Página{% endblock %}</h1>
+        </div>
+        {% endif %}
+        <main class="{% if request.path == '/' %}main-home{%else %}main{% endif %}">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <div class="bottom-tab">
+        <a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">
+            <span class="material-icons">home</span>
+            <div>Home</div>
+        </a>
+        <a href="{% url 'about' %}" class="{% if request.path == '/sobre/' %}active{% endif %}">
+            <span class="material-icons">info</span>
+            <div>Sobre</div>
+        </a>
+        <a href="{% url 'terms' %}" class="{% if request.path == '/definicoes/' %}active{% endif %}">
+            <span class="material-icons">menu_book</span>
+            <div>Definições</div>
+        </a>
+        <a href="{% url 'references' %}" class="{% if request.path == '/referencias/' %}active{% endif %}">
+            <span class="material-icons">bookmark</span>
+            <div>Referências</div>
+        </a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}{{ termo.titulo }} - IHCionário{% endblock %}
+
+{% block pageTitle %}{{ termo.titulo }}{% endblock %}
+
+{% block pageTitleMobile %}{{ termo.titulo }}{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    {% for definicao in termo.definicoes.all %}
+    <div class="term-definition">
+        <div class="title-section">
+            <p class="title-text">Definição {{ forloop.counter }}</p>
+        </div>
+        <div class="img-section">
+            <img class="image-responsive"
+                src="{{ definicao.image_url }}"
+                alt="Imagem representativa da definição." />
+        </div>
+        <div class="description-section">
+            <p class="description-text">{{ definicao.texto }}</p>
+            {% if definicao.exemplos.all %}
+                <div class="examples-section">
+                    {% for exemplo in definicao.exemplos.all %}
+                        <div class="example">
+                            <p class="section-title">Exemplo {{forloop.counter}}:</p>
+                            <p class="example-description-text">{{ exemplo.descricao }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}  
+        </div>
+        {% if definicao.referencias.all %}
+        <div class="reference-section">
+            <p class="section-title">Referências</p>
+            {% for referencia in definicao.referencias.all %}
+            <p class="reference-text">{{ referencia.titulo }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
