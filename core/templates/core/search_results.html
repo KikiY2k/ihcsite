@@ -38,8 +38,9 @@
     <div class="definition-item {% if forloop.last %}no-border{% endif %}">
         <span class="material-icons">menu_book</span>
         <div class="definition-text">
-            <a href="{% url 'detail' id=termo.id %}" style="text-decoration: none;">
-                <h3 class="definition-term">{{ termo.titulo }}</h3>
+            <a href="{% url 'detail' id=termo.id %}" style="text-decoration: none; display: flex; align-items: center; gap: 4px;">
+                <h3 class="definition-term" style="margin: 0;">{{ termo.titulo }}</h3>
+                <span class="material-icons" style="font-size: 20px; color: #933dbd;">open_in_new</span>
             </a>
             {% with definicao=termo.definicoes.first %}
             <p class="definition-text">{{ definicao.texto }}</p>

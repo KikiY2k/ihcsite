@@ -11,8 +11,9 @@
 <div class="page-content">
     {% for termo in termos %}
     <div class="reference-item">
-        <a href="{% url 'detail' id=termo.id %}" style="text-decoration: none;">
+        <a href="{% url 'detail' id=termo.id %}" style="text-decoration: none; display: flex; align-items: center; gap: 4px;">
             <h3 class="reference-term">{{ termo.titulo }}</h3>
+            <span class="material-icons" style="font-size: 20px; color: #0E4583;">open_in_new</span>
         </a>
         {% with refs=termo.definicoes.all %}
         {% if refs %}
