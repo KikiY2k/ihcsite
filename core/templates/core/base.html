@@ -22,7 +22,7 @@
         <form action="{% url 'search' %}" method="get">
             <div class="mobile-search-box">
                 <span class="material-icons">search</span>
-                <input type="text" placeholder="Pesquisar" name="q" value="{{ query }}" />
+                <input type="text" placeholder="Pesquisar" name="q" value="{{ query }}" required/>
             </div>
         </form>
     </header>
@@ -48,7 +48,7 @@
             <form action="{% url 'search' %}" method="get">
                 <div class="search-box">
                     <span class="material-icons">search</span>
-                    <input type="text" placeholder="Pesquisar" name="q" value="{{ query }}" />
+                    <input type="text" placeholder="Pesquisar" name="q" value="{{ query }}"required/>
                 </div>
             </form>
             <nav>

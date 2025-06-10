@@ -9,7 +9,7 @@
         <form action="{% url 'search' %}" method="get">
         <h1>IHCionário</h1>
         <p class="subtitle">Encontre definições para termos usados em Interação Humano-Computador.</p>
-        <input class="search-input" type="text" placeholder="Ex: Usabilidade" name="q" value="{{ query }}"  />
+        <input class="search-input" type="text" placeholder="Ex: Usabilidade" name="q" value="{{ query }}" required />
         <button class="search-button" type="submit">Buscar</button>
         </form>
     </div>
