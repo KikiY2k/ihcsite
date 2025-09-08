@@ -5,8 +5,8 @@
 }
 
 body {
-    font-family: 'Quicksand';
-    font-weight: 500;
+    font-family: "Patua one", serif;
+    font-weight: 400;
     display: flex;
     flex-direction: column;
     height: 100vh;
